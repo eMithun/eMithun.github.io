@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .thank-you-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--page-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .thank-you-icon {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .thank-you-title {
+            color: #b30a2f;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .thank-you-message {
+            color: var(--text-color);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .back-home {
+            display: inline-block;
+            background: #b30a2f;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: #8f0824;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(179, 10, 47, 0.2);
+        }
+
+        @media screen and (max-width: 768px) {
+            .thank-you-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .thank-you-icon {
+                font-size: 36px;
+            }
+
+            .thank-you-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <i class="fas fa-check-circle thank-you-icon"></i>
+        <h1 class="thank-you-title">Thank You!</h1>
+        <p class="thank-you-message">
+            Your message has been sent successfully. I'll get back to you as soon as possible.
+        </p>
+        <a href="index.html" class="back-home">Back to Home</a>
+    </div>
+</body>
+</html> 
