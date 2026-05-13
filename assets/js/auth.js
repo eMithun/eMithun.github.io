@@ -2,8 +2,8 @@
   'use strict'
 
   const ADMIN_EMAIL = 'admin@codefx.dev'
-  const PW_HASH = 'fb0d7563294447bb394008cf6358265249eef7ede54e3771d4f046831a6310613214bdcefaa49cd1b09014947e40b56d10c7c7c0fe3822f232f2cdb4e67c1b65'
-  const PW_SALT = '937b05e51ab3fdd3a1123c2e890b5d61'
+  const PW_HASH = 'fd1d7c76c45b36e937adf3f1b84aba5e9e35117b798b0b9cc31fbb3127c02493'
+  const PW_SALT = 'a14ec9c041634a1f1b0198ce26e230aa'
   const AUTH_KEY = 'codefx_session'
   const SESSION_DURATION = 604800000
   const MAX_ATTEMPTS = 5
