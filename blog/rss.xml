@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>eMithun Blog</title>
+    <title>Mithun Hasan Blog</title>
     <link>https://eMithun.github.io</link>
-    <description>Latest blog posts from eMithun</description>
+    <description>Latest blog posts from Mithun Hasan</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 May 2026 10:42:30 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 13 May 2026 10:57:36 GMT</lastBuildDate>
     <atom:link href="https://eMithun.github.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
   </channel>
 </rss>
