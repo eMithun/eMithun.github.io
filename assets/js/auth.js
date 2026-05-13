@@ -5,6 +5,8 @@
   const SECRET_TRIGGER = 'Control+Shift+L'
   let loginModal = null
   let isLoggedIn = !!localStorage.getItem(AUTH_KEY)
+  let hiddenClickCount = 0
+  let clickTimer = null
 
   document.addEventListener('keydown', function(e) {
     const combo = [e.ctrlKey || e.metaKey ? 'Control' : '', e.shiftKey ? 'Shift' : '', e.key.toUpperCase()]
@@ -15,11 +17,10 @@
     }
   })
 
-  let hiddenClickCount = 0
-  let clickTimer = null
-  document.addEventListener('dblclick', function(e) {
-    const header = e.target.closest('header')
-    if (!header) return
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('#login-toggle')
+    if (btn) { e.preventDefault(); toggleLoginModal(); return }
+    if (!e.target.closest('header')) return
     hiddenClickCount++
     clearTimeout(clickTimer)
     clickTimer = setTimeout(function() { hiddenClickCount = 0 }, 800)

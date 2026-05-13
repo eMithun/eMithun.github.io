@@ -21,9 +21,14 @@ const CodeFX = {
   toggleTheme() {
     const current = document.documentElement.getAttribute('data-theme')
     const next = current === 'dark' ? 'light' : 'dark'
-    document.documentElement.setAttribute('data-theme', next)
-    localStorage.setItem('codefx-theme', next)
-    this.emit('themeChange', next)
+    const html = document.documentElement
+    html.classList.add('theme-transitioning')
+    requestAnimationFrame(() => {
+      html.setAttribute('data-theme', next)
+      localStorage.setItem('codefx-theme', next)
+      this.emit('themeChange', next)
+      setTimeout(() => html.classList.remove('theme-transitioning'), 400)
+    })
   },
 
   initNavigation() {
