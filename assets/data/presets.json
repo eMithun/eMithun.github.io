@@ -1,0 +1,47 @@
+{
+  "modern": {
+    "name": "Modern",
+    "colors": {
+      "primary": "#3b82f6",
+      "secondary": "#8b5cf6",
+      "accent": "#f59e0b"
+    },
+    "darkMode": true
+  },
+  "minimal": {
+    "name": "Minimal",
+    "colors": {
+      "primary": "#1a1a2e",
+      "secondary": "#16213e",
+      "accent": "#e94560"
+    },
+    "darkMode": false
+  },
+  "nature": {
+    "name": "Nature",
+    "colors": {
+      "primary": "#166534",
+      "secondary": "#15803d",
+      "accent": "#facc15"
+    },
+    "darkMode": true
+  },
+  "creative": {
+    "name": "Creative",
+    "colors": {
+      "primary": "#6d28d9",
+      "secondary": "#db2777",
+      "accent": "#f97316"
+    },
+    "darkMode": true
+  },
+  "professional": {
+    "name": "Professional",
+    "colors": {
+      "primary": "#1e3a5f",
+      "secondary": "#2d5a87",
+      "accent": "#c99700"
+    },
+    "darkMode": false
+  }
+}

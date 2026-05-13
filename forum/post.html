@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Post — CodeFX Forum</title>
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/utilities.css">
+  <link rel="stylesheet" href="/assets/css/forum.css">
+</head>
+<body>
+  <header style="height:var(--header-height);border-bottom:1px solid var(--color-border);background:var(--color-background);position:sticky;top:0;z-index:100">
+    <div class="container flex items-center justify-between" style="height:100%">
+      <a href="/" style="font-weight:700;font-size:1.25rem">CodeFX Forum</a>
+      <nav class="flex gap-md"><a href="/">Home</a><a href="/forum">Forum</a></nav>
+    </div>
+  </header>
+  <main class="container section" style="max-width:48rem">
+    <div id="post-view"></div>
+    <div id="replies" style="margin-top:2rem"></div>
+    <div style="margin-top:2rem">
+      <h3 style="margin-bottom:1rem">Reply</h3>
+      <textarea id="reply-content" rows="4" style="width:100%;padding:0.75rem;border:1px solid var(--color-border);border-radius:var(--radius-md);resize:vertical;background:var(--color-surface)" placeholder="Write your reply..."></textarea>
+      <button class="btn btn-primary" onclick="submitReply()" style="margin-top:0.5rem">Post Reply</button>
+    </div>
+  </main>
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/forum.js"></script>
+</body>
+</html>

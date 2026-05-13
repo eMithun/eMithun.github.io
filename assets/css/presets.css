@@ -1,0 +1,5 @@
+/* Theme preset: modern */
+body { font-family: var(--font-body); color: var(--color-text); background: var(--color-background); }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); line-height: 1.2; }
+::selection { background: var(--color-primary); color: white; }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }

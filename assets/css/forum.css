@@ -1,0 +1,9 @@
+.forum-category { margin-bottom: 2rem; }
+.forum-category h2 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-primary); display: inline-block; }
+.forum-post { padding: 1rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: 0.75rem; cursor: pointer; transition: box-shadow 0.2s; }
+.forum-post:hover { box-shadow: var(--shadow-sm); }
+.forum-post h3 { font-weight: 600; margin-bottom: 0.25rem; }
+.forum-post .meta { font-size: 0.75rem; color: var(--color-text-muted); }
+.forum-post .category { display: inline-block; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 500; background: var(--color-primary); color: white; margin-right: 0.5rem; }
+.reply { padding: 1rem; border-left: 3px solid var(--color-border); margin-bottom: 1rem; }
+.reply .meta { font-size: 0.75rem; color: var(--color-text-muted); margin-bottom: 0.5rem; }
