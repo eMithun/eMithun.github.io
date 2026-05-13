@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Publisher — CodeFX Admin</title>
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/utilities.css">
+  <link rel="stylesheet" href="/assets/css/social-poster.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <h2>CodeFX</h2>
+      <nav>
+        <a href="/admin/index.html">Dashboard</a>
+        <a href="/admin/database">Database</a>
+        <a href="/admin/social/index.html" class="active">Social</a>
+        <a href="/">View Site</a>
+      </nav>
+    </aside>
+    <main class="admin-content">
+      <div class="admin-header">
+        <h1>Social Media Publisher</h1>
+        <p>Connect accounts and auto-post content updates</p>
+      </div>
+      <div class="admin-header">
+        <h2>Connected Accounts</h2>
+        <p>Link your social media profiles for auto-publishing</p>
+      </div>
+      <div id="accounts-list" class="accounts-grid"></div>
+      <div class="admin-header" style="margin-top:2rem">
+        <h2>Manual Post</h2>
+        <p>Send a post to all connected accounts</p>
+      </div>
+      <div class="post-form">
+        <textarea id="post-content" rows="4" placeholder="What do you want to share?"></textarea>
+        <button onclick="sendPost()" class="btn btn-primary">Post to All Connected Accounts</button>
+        <div id="post-result" style="margin-top:0.75rem"></div>
+      </div>
+      <div class="admin-header" style="margin-top:2rem">
+        <h2>Recent Activity</h2>
+      </div>
+      <div id="activity-log" class="activity-log"><p class="text-muted" style="text-align:center;padding:1rem">No recent activity.</p></div>
+    </main>
+  </div>
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/social-poster.js"></script>
+</body>
+</html>

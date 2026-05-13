@@ -1,0 +1,26 @@
+.accounts-grid { display: grid; gap: 1rem; }
+.account-card { display: flex; align-items: center; justify-content: space-between; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem 1.25rem; }
+.account-card .info { display: flex; align-items: center; gap: 0.75rem; }
+.account-card .platform-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.account-card .platform-name { font-weight: 600; }
+.account-card .platform-status { font-size: 0.8rem; }
+.account-card .connected { color: #16a34a; }
+.account-card .disconnected { color: var(--color-text-muted); }
+.post-form textarea { width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: 0.9rem; resize: vertical; min-height: 100px; background: var(--color-bg); margin-bottom: 0.75rem; }
+.activity-log { display: grid; gap: 0.5rem; }
+.activity-item { padding: 0.75rem; border-bottom: 1px solid var(--color-border); font-size: 0.875rem; display: flex; justify-content: space-between; }
+.activity-item .time { color: var(--color-text-muted); font-size: 0.75rem; }
+.btn { padding: 0.5rem 1rem; border-radius: var(--radius-md); font-size: 0.875rem; font-weight: 500; cursor: pointer; border: 1px solid transparent; }
+.btn-primary { background: var(--color-primary); color: white; }
+.btn-outline { background: transparent; border-color: var(--color-border); }
+.admin-layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+.admin-sidebar { background: var(--color-surface); border-right: 1px solid var(--color-border); padding: 1.5rem; }
+.admin-sidebar h2 { font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem; }
+.admin-sidebar nav { display: grid; gap: 0.25rem; }
+.admin-sidebar a { padding: 0.5rem 0.75rem; border-radius: var(--radius-md); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit; }
+.admin-sidebar a:hover { background: var(--color-border); }
+.admin-sidebar a.active { background: var(--color-primary); color: white; }
+.admin-content { padding: 2rem; max-width: 56rem; }
+.admin-header { margin-bottom: 2rem; }
+.admin-header h1 { font-size: 1.5rem; font-weight: 700; }
+.admin-header p { color: var(--color-text-muted); font-size: 0.875rem; }

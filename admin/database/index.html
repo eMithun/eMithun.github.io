@@ -31,13 +31,13 @@
   <main class="container section">
     <div class="db-header">
       <h1 style="font-size:1.5rem;font-weight:700">Database Manager</h1>
-      <p class="text-muted">Schema overview — 10 tables</p>
+      <p class="text-muted">Schema overview — 14 tables</p>
     </div>
 
     <div class="db-stats">
-      <div class="db-stat"><div class="db-stat-value">10</div><div class="db-stat-label">Tables</div></div>
-      <div class="db-stat"><div class="db-stat-value">86</div><div class="db-stat-label">Columns</div></div>
-      <div class="db-stat"><div class="db-stat-value">24</div><div class="db-stat-label">Indexes</div></div>
+      <div class="db-stat"><div class="db-stat-value">14</div><div class="db-stat-label">Tables</div></div>
+      <div class="db-stat"><div class="db-stat-value">122</div><div class="db-stat-label">Columns</div></div>
+      <div class="db-stat"><div class="db-stat-value">34</div><div class="db-stat-label">Indexes</div></div>
     </div>
 
     <h2 style="font-size:1.125rem;font-weight:600;margin-bottom:1rem">Tables</h2>
@@ -80,6 +80,22 @@
     </div>
     <div class="db-table-card" onclick="showTable('gallery_albums')">
       <h3>gallery_albums</h3>
+      <p class="text-muted">9 columns</p>
+    </div>
+    <div class="db-table-card" onclick="showTable('plugins')">
+      <h3>plugins</h3>
+      <p class="text-muted">7 columns</p>
+    </div>
+    <div class="db-table-card" onclick="showTable('sso_connections')">
+      <h3>sso_connections</h3>
+      <p class="text-muted">10 columns</p>
+    </div>
+    <div class="db-table-card" onclick="showTable('social_accounts')">
+      <h3>social_accounts</h3>
+      <p class="text-muted">10 columns</p>
+    </div>
+    <div class="db-table-card" onclick="showTable('audit_log')">
+      <h3>audit_log</h3>
       <p class="text-muted">9 columns</p>
     </div></div>
     <div id="table-details">
@@ -972,6 +988,374 @@
           <h3 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem">Indexes</h3>
           <div class="flex gap-sm" style="flex-wrap:wrap">
             <span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">category</span><span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">timestamp</span>
+          </div>
+        </div>
+    </div>
+    <div id="table-plugins" class="db-table-detail" style="display:none">
+      <div class="flex items-center justify-between" style="margin-bottom:1rem">
+        <h2 style="font-size:1.25rem;font-weight:700">plugins</h2>
+        <button class="btn btn-outline" onclick="hideTable('plugins')">Close</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr style="background:var(--color-surface)">
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Column</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Type</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Required</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Default</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Unique</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>id</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>name</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>version</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>enabled</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">INTEGER</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">0</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>config</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">JSON</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">{}</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>created_at</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>updated_at</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      
+        <div style="margin-top:1rem">
+          <h3 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem">Indexes</h3>
+          <div class="flex gap-sm" style="flex-wrap:wrap">
+            <span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">name</span>
+          </div>
+        </div>
+    </div>
+    <div id="table-sso_connections" class="db-table-detail" style="display:none">
+      <div class="flex items-center justify-between" style="margin-bottom:1rem">
+        <h2 style="font-size:1.25rem;font-weight:700">sso_connections</h2>
+        <button class="btn btn-outline" onclick="hideTable('sso_connections')">Close</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr style="background:var(--color-surface)">
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Column</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Type</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Required</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Default</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Unique</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>id</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>userId</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>provider</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>providerId</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>email</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>name</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>avatar</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>token</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>created_at</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>updated_at</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      
+        <div style="margin-top:1rem">
+          <h3 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem">Indexes</h3>
+          <div class="flex gap-sm" style="flex-wrap:wrap">
+            <span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">userId</span><span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">provider</span><span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">providerId</span>
+          </div>
+        </div>
+    </div>
+    <div id="table-social_accounts" class="db-table-detail" style="display:none">
+      <div class="flex items-center justify-between" style="margin-bottom:1rem">
+        <h2 style="font-size:1.25rem;font-weight:700">social_accounts</h2>
+        <button class="btn btn-outline" onclick="hideTable('social_accounts')">Close</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr style="background:var(--color-surface)">
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Column</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Type</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Required</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Default</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Unique</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>id</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>userId</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>platform</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>accessToken</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>refreshToken</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>expiresAt</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">INTEGER</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>connected</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">INTEGER</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">0</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>autoPost</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">INTEGER</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">0</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>created_at</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>updated_at</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      
+        <div style="margin-top:1rem">
+          <h3 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem">Indexes</h3>
+          <div class="flex gap-sm" style="flex-wrap:wrap">
+            <span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">userId</span><span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">platform</span>
+          </div>
+        </div>
+    </div>
+    <div id="table-audit_log" class="db-table-detail" style="display:none">
+      <div class="flex items-center justify-between" style="margin-bottom:1rem">
+        <h2 style="font-size:1.25rem;font-weight:700">audit_log</h2>
+        <button class="btn btn-outline" onclick="hideTable('audit_log')">Close</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr style="background:var(--color-surface)">
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Column</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Type</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Required</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Default</th>
+              <th style="text-align:left;padding:0.5rem 0.75rem;border-bottom:2px solid var(--color-border)">Unique</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>id</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>action</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">✓</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>entity</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>entityId</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>userId</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>details</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">JSON</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">{}</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>ip</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>timestamp</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">INTEGER</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+              <tr>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)"><code>created_at</code></td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">TEXT</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+                <td style="padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border)">-</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      
+        <div style="margin-top:1rem">
+          <h3 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem">Indexes</h3>
+          <div class="flex gap-sm" style="flex-wrap:wrap">
+            <span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">action</span><span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">entity</span><span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">userId</span><span style="background:var(--color-surface);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);font-size:0.75rem">timestamp</span>
           </div>
         </div>
     </div></div>

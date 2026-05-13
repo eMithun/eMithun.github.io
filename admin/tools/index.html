@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools — CodeFX Admin</title>
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/utilities.css">
+  <link rel="stylesheet" href="/assets/css/tools.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <h2>CodeFX</h2>
+      <nav>
+        <a href="/admin/index.html">Dashboard</a>
+        <a href="/admin/database">Database</a>
+        <a href="/admin/plugins/index.html">Plugins</a>
+        <a href="/admin/tools/index.html" class="active">Tools</a>
+        <a href="/admin/files/index.html">Files</a>
+        <a href="/">View Site</a>
+      </nav>
+    </aside>
+    <main class="admin-content">
+      <div class="admin-header">
+        <h1>Tools</h1>
+        <p>Built-in developer and content utilities</p>
+      </div>
+      <div id="tool-grid" class="tool-grid"></div>
+      <div id="tool-panel" class="tool-panel" style="display:none">
+        <button onclick="closeTool()" class="btn btn-outline" style="margin-bottom:1rem">&larr; Back to Tools</button>
+        <div id="tool-content"></div>
+      </div>
+    </main>
+  </div>
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/tools.js"></script>
+</body>
+</html>

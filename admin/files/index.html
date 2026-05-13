@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Manager — CodeFX Admin</title>
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/utilities.css">
+  <link rel="stylesheet" href="/assets/css/filemanager.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <h2>CodeFX</h2>
+      <nav>
+        <a href="/admin/index.html">Dashboard</a>
+        <a href="/admin/database">Database</a>
+        <a href="/admin/plugins/index.html">Plugins</a>
+        <a href="/admin/tools/index.html">Tools</a>
+        <a href="/admin/files/index.html" class="active">Files</a>
+        <a href="/">View Site</a>
+      </nav>
+    </aside>
+    <main class="admin-content">
+      <div class="admin-header">
+        <h1>File Manager</h1>
+        <p>Browse and manage project files</p>
+      </div>
+      <div class="fm-toolbar">
+        <div class="fm-breadcrumb" id="fm-breadcrumb">/</div>
+        <div class="fm-actions">
+          <button class="btn btn-primary" onclick="uploadFile()">Upload</button>
+          <button class="btn btn-outline" onclick="newFolder()">New Folder</button>
+        </div>
+      </div>
+      <div id="fm-status" class="fm-status" style="display:none"></div>
+      <div class="fm-table-header">
+        <span class="col-name">Name</span>
+        <span class="col-size">Size</span>
+        <span class="col-type">Type</span>
+        <span class="col-actions">Actions</span>
+      </div>
+      <div id="fm-list" class="fm-list"><p class="text-muted" style="text-align:center;padding:2rem">Loading...</p></div>
+    </main>
+  </div>
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/filemanager.js"></script>
+</body>
+</html>

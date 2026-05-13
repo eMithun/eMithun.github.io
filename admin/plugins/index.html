@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plugins — CodeFX Admin</title>
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/utilities.css">
+  <link rel="stylesheet" href="/assets/css/plugins.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <h2>CodeFX</h2>
+      <nav>
+        <a href="/admin/index.html">Dashboard</a>
+        <a href="/admin/database">Database</a>
+        <a href="/admin/plugins/index.html" class="active">Plugins</a>
+        <a href="/admin/tools/index.html">Tools</a>
+        <a href="/admin/files/index.html">Files</a>
+        <a href="/">View Site</a>
+      </nav>
+    </aside>
+    <main class="admin-content">
+      <div class="admin-header">
+        <h1>Plugin Manager</h1>
+        <p>Manage installed plugins. Place plugins in the <code>plugins/</code> directory.</p>
+      </div>
+      <div id="plugin-list" class="plugin-grid"></div>
+      <div class="admin-header" style="margin-top:2rem">
+        <h2>Install Plugin</h2>
+        <p>Create a directory in <code>plugins/&lt;name&gt;/</code> with a <code>plugin.json</code> manifest.</p>
+      </div>
+      <div class="info-card">
+        <p><strong>plugin.json</strong> format:</p>
+        <pre>{
+  &quot;name&quot;: &quot;my-plugin&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Does something&quot;,
+  &quot;enabled&quot;: true
+}</pre>
+        <p style="margin-top:0.75rem">Optionally add an <code>index.js</code> with hooks: <code>onInit(app)</code>, <code>onBuild(builder)</code>, <code>onRoute(router, mode)</code>.</p>
+      </div>
+    </main>
+  </div>
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/plugins.js"></script>
+</body>
+</html>
