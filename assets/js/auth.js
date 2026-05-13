@@ -1,14 +1,43 @@
 (function() {
   'use strict'
 
+  const ADMIN_EMAIL = 'admin@codefx.dev'
+  const PW_HASH = 'fb0d7563294447bb394008cf6358265249eef7ede54e3771d4f046831a6310613214bdcefaa49cd1b09014947e40b56d10c7c7c0fe3822f232f2cdb4e67c1b65'
+  const PW_SALT = '937b05e51ab3fdd3a1123c2e890b5d61'
   const AUTH_KEY = 'codefx_session'
-  const SECRET_TRIGGER = 'Control+Shift+L'
   const SESSION_DURATION = 604800000
-  const MIN_PW_LEN = 8
+  const MAX_ATTEMPTS = 5
+  const COOLDOWN_MS = 60000
+  const SECRET_TRIGGER = 'Control+Shift+L'
   let loginModal = null
-  let isLoggedIn = !!localStorage.getItem(AUTH_KEY)
+  let isLoggedIn = false
+  let loginAttempts = 0
+  let loginBlockedUntil = 0
   let hiddenClickCount = 0
   let clickTimer = null
+
+  function validateSession() {
+    var raw = localStorage.getItem(AUTH_KEY)
+    if (!raw) { isLoggedIn = false; return }
+    try {
+      var session = JSON.parse(raw)
+      if (Date.now() - session.loginTime > SESSION_DURATION) {
+        localStorage.removeItem(AUTH_KEY)
+        isLoggedIn = false; return
+      }
+      isLoggedIn = session.email === ADMIN_EMAIL
+    } catch { localStorage.removeItem(AUTH_KEY); isLoggedIn = false }
+  }
+
+  async function hashPass(password) {
+    var enc = new TextEncoder()
+    var data = enc.encode(PW_SALT + password)
+    var hashBuf = await crypto.subtle.digest('SHA-256', data)
+    var hashArr = Array.from(new Uint8Array(hashBuf))
+    return hashArr.map(function(b) { return b.toString(16).padStart(2, '0') }).join('')
+  }
+
+  validateSession()
 
   document.addEventListener('keydown', function(e) {
     const combo = [e.ctrlKey || e.metaKey ? 'Control' : '', e.shiftKey ? 'Shift' : '', e.key.toUpperCase()]
@@ -45,99 +74,65 @@
       '<div class="codefx-modal">' +
       '<button class="codefx-modal-close" onclick="this.closest(\'#codefx-login-modal\').remove(); loginModal=null">&times;</button>' +
       '<h2>Sign In</h2>' +
+      '<p id="login-error" class="text-muted" style="font-size:0.8rem;margin-bottom:0.75rem;color:#ef4444;display:none"></p>' +
       '<form id="codefx-login-form">' +
       '<label>Email<input type="email" id="codefx-login-email" required></label>' +
       '<label>Password<input type="password" id="codefx-login-password" required></label>' +
       '<button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Sign In</button>' +
-      '<p style="text-align:center;margin-top:1rem"><a href="#" onclick="showRegister();return false">Create account</a></p>' +
       '</form></div></div>'
     document.body.appendChild(loginModal)
 
     document.getElementById('codefx-login-form').addEventListener('submit', function(e) {
       e.preventDefault()
+      if (Date.now() < loginBlockedUntil) {
+        showLoginErr('Too many attempts. Try again in ' + Math.ceil((loginBlockedUntil - Date.now()) / 1000) + 's')
+        return
+      }
       const email = document.getElementById('codefx-login-email').value
       const password = document.getElementById('codefx-login-password').value
       handleLogin(email, password)
     })
   }
 
-  window.showRegister = function() {
-    const modal = loginModal || document.getElementById('codefx-login-modal')
-    if (!modal) return
-    const formContainer = modal.querySelector('.codefx-modal')
-    formContainer.innerHTML = '<button class="codefx-modal-close" onclick="this.closest(\'#codefx-login-modal\').remove(); loginModal=null">&times;</button>' +
-      '<h2>Create Account</h2>' +
-      '<form id="codefx-register-form">' +
-      '<label>Name<input type="text" id="codefx-register-name" required></label>' +
-      '<label>Email<input type="email" id="codefx-register-email" required></label>' +
-      '<label>Password<input type="password" id="codefx-register-password" required minlength="8"></label>' +
-      '<button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Register</button>' +
-      '<p style="text-align:center;margin-top:1rem"><a href="#" onclick="showLoginForm();return false">Already have an account?</a></p>' +
-      '</form>'
-
-    document.getElementById('codefx-register-form').addEventListener('submit', function(e) {
-      e.preventDefault()
-      const name = document.getElementById('codefx-register-name').value
-      const email = document.getElementById('codefx-register-email').value
-      const password = document.getElementById('codefx-register-password').value
-      handleRegister(name, email, password)
-    })
-  }
-
-  window.showLoginForm = function() {
-    loginModal.remove(); loginModal = null
-    showLoginModal()
+  function showLoginErr(msg) {
+    var el = document.getElementById('login-error')
+    if (el) { el.textContent = msg; el.style.display = 'block' }
   }
 
   async function handleLogin(email, password) {
-    const mode = document.querySelector('meta[name="codefx-mode"]')?.content || 'static'
-    if (mode === 'static') {
-      localStorage.setItem(AUTH_KEY, JSON.stringify({ email, name: email.split('@')[0], loginTime: Date.now() }))
-      isLoggedIn = true
-      loginModal.remove(); loginModal = null
-      window.CodeFX && CodeFX.emit('auth:login', { email })
+    if (!ADMIN_EMAIL || !PW_HASH || !PW_SALT) {
+      showLoginErr('Authentication not configured')
       return
     }
-    try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      })
-      if (!res.ok) throw new Error('Login failed')
-      const data = await res.json()
-      localStorage.setItem(AUTH_KEY, JSON.stringify(data.user))
-      isLoggedIn = true
-      loginModal.remove(); loginModal = null
-      window.CodeFX && CodeFX.emit('auth:login', data.user)
-    } catch (err) {
-      alert('Login failed: ' + err.message)
-    }
-  }
-
-  async function handleRegister(name, email, password) {
-    if (password.length < MIN_PW_LEN) { alert('Password must be at least ' + MIN_PW_LEN + ' characters'); return }
-    const mode = document.querySelector('meta[name="codefx-mode"]')?.content || 'static'
-    if (mode === 'static') {
-      localStorage.setItem(AUTH_KEY, JSON.stringify({ email, name, loginTime: Date.now() }))
-      isLoggedIn = true
-      loginModal.remove(); loginModal = null
+    if (email !== ADMIN_EMAIL) {
+      loginAttempts++
+      if (loginAttempts >= MAX_ATTEMPTS) {
+        loginBlockedUntil = Date.now() + COOLDOWN_MS
+        loginAttempts = 0
+      }
+      showLoginErr('Invalid email or password')
       return
     }
-    try {
-      const res = await fetch('/api/auth/register', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
-      })
-      if (!res.ok) throw new Error('Registration failed')
-      alert('Account created! Please sign in.')
-      window.showLoginForm()
-    } catch (err) {
-      alert('Registration failed: ' + err.message)
+    var hash = await hashPass(password)
+    if (hash !== PW_HASH) {
+      loginAttempts++
+      if (loginAttempts >= MAX_ATTEMPTS) {
+        loginBlockedUntil = Date.now() + COOLDOWN_MS
+        loginAttempts = 0
+      }
+      showLoginErr('Invalid email or password')
+      return
     }
+    loginAttempts = 0
+    localStorage.setItem(AUTH_KEY, JSON.stringify({ email, name: ADMIN_EMAIL.split('@')[0], loginTime: Date.now() }))
+    isLoggedIn = true
+    loginModal.remove(); loginModal = null
+    window.CodeFX && CodeFX.emit('auth:login', { email })
   }
 
   function showProfile() {
-    const user = JSON.parse(localStorage.getItem(AUTH_KEY) || '{}')
+    var raw = localStorage.getItem(AUTH_KEY)
+    var user = raw ? JSON.parse(raw) : {}
     loginModal = document.createElement('div')
     loginModal.id = 'codefx-login-modal'
     loginModal.innerHTML = '<div class="codefx-modal-overlay">' +
