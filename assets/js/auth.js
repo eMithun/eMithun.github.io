@@ -2,8 +2,8 @@
   'use strict'
 
   const ADMIN_EMAIL = 'admin'
-  const PW_HASH = 'c432f5151c8cac8cd5c3c15b2496b5ef4dd92bd43cabfecd84ef3386f19d48d7'
-  const PW_SALT = '35cfd224f15937278d9cba48b80bb1ac'
+  const PW_HASH = 'fe0f6fada67c94a873ff836d3624cb3d2a45e87135e8f0f42389a565c74bbf29'
+  const PW_SALT = '30ca93e3be64ac5d8ec435c6340df881'
   const AUTH_KEY = 'codefx_session'
   const SESSION_DURATION = 604800000
   const MAX_ATTEMPTS = 5
@@ -128,6 +128,7 @@
     isLoggedIn = true
     loginModal.remove(); loginModal = null
     window.CodeFX && CodeFX.emit('auth:login', { email })
+    window.location.href = '/admin'
   }
 
   function showProfile() {
