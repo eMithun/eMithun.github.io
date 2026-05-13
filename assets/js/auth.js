@@ -1,9 +1,9 @@
 (function() {
   'use strict'
 
-  const ADMIN_EMAIL = 'admin'
-  const PW_HASH = '61cbca11f54a6cf534d8117d4f6d78034bae62b79f711c65757cc243d1815a41'
-  const PW_SALT = '1f804c2bc95f48122c6518c3fb0e152b'
+  const ADMIN_EMAIL = 'admin@codefx.dev'
+  const PW_HASH = '21e9a8bb165ea25a6a8418feb633ca2b990ef254d529a3f54553e0bfc0bfb357'
+  const PW_SALT = '20b55c13e0a6739eb17bd18aae7793cb'
   const AUTH_KEY = 'codefx_session'
   const SESSION_DURATION = 604800000
   const MAX_ATTEMPTS = 5
