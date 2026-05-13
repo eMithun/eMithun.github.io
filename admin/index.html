@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — CodeFX CMS</title>
+  <title>Dashboard — CodeFX</title>
   <link rel="stylesheet" href="/assets/css/reset.css">
   <link rel="stylesheet" href="/assets/css/variables.css">
   <link rel="stylesheet" href="/assets/css/utilities.css">
@@ -11,12 +11,20 @@
   <style>
     .admin-layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
     .admin-sidebar { background: var(--color-surface); border-right: 1px solid var(--color-border); padding: 1.5rem; }
-    .admin-sidebar nav { display: grid; gap: 0.5rem; }
-    .admin-sidebar a { padding: 0.5rem 0.75rem; border-radius: var(--radius-md); }
+    .admin-sidebar h2 { font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem; }
+    .admin-sidebar nav { display: grid; gap: 0.25rem; }
+    .admin-sidebar a { padding: 0.5rem 0.75rem; border-radius: var(--radius-md); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
     .admin-sidebar a:hover { background: var(--color-border); }
     .admin-sidebar a.active { background: var(--color-primary); color: white; }
-    .admin-content { padding: 2rem; }
+    .admin-sidebar .badge { margin-left: auto; font-size: 0.7rem; padding: 0.125rem 0.5rem; border-radius: 999px; background: var(--color-primary); color: white; }
+    .admin-content { padding: 2rem; max-width: 48rem; }
     .admin-header { margin-bottom: 2rem; }
+    .admin-header h1 { font-size: 1.5rem; font-weight: 700; }
+    .admin-header p { color: var(--color-text-muted); font-size: 0.875rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { padding: 1.25rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); text-align: center; }
+    .stat-card .value { font-size: 1.75rem; font-weight: 800; }
+    .stat-card .label { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem; }
     .section-list { display: grid; gap: 0.75rem; }
     .section-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: grab; }
     .section-item:hover { box-shadow: var(--shadow-sm); }
@@ -24,54 +32,120 @@
     .section-item.drag-over { border-color: var(--color-primary); }
     .add-btn { border: 2px dashed var(--color-border); padding: 1rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; color: var(--color-text-muted); }
     .add-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    #dashboard-content, #sections-content { display: none; }
+    #dashboard-content.active, #sections-content.active { display: block; }
+    .activity-list { margin-bottom: 2rem; }
+    .activity-item { padding: 0.75rem 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-item .time { font-size: 0.75rem; color: var(--color-text-muted); }
+    .system-info { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem; display: grid; gap: 0.5rem; font-size: 0.875rem; }
+    .system-info .row { display: flex; justify-content: space-between; padding: 0.25rem 0; }
+    .system-info .label { color: var(--color-text-muted); }
+    .system-info .value { font-weight: 500; }
   </style>
 </head>
 <body>
   <div class="admin-layout">
     <aside class="admin-sidebar">
-      <h2 style="font-weight:700;margin-bottom:1.5rem">CodeFX CMS</h2>
+      <h2>CodeFX</h2>
       <nav>
-        <a href="/admin" class="active">Sections</a>
-        <a href="/">View Site</a>
+        <a href="#" onclick="showDashboard()" id="nav-dashboard" class="active">&#x1F4CA; Dashboard</a>
+        <a href="#" onclick="showSections()" id="nav-sections">&#x2699; Sections</a>
+        <a href="/admin/database">&#x1F4BE; Database</a>
+        <a href="/blog/admin.html">&#x270F; Blog</a>
+        <a href="/gallery/admin.html">&#x1F5BC; Gallery</a>
+        <a href="/">&#x2190; View Site</a>
       </nav>
     </aside>
     <main class="admin-content">
-      <div class="admin-header">
-        <h1 style="font-size:1.5rem;font-weight:700">Manage Sections</h1>
-        <p class="text-muted">Drag to reorder. Double-click to edit content.</p>
+      <div id="dashboard-content" class="active">
+        <div class="admin-header">
+          <h1>Dashboard</h1>
+          <p>Site overview and recent activity</p>
+        </div>
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card"><div class="value" id="stat-posts">0</div><div class="label">Blog Posts</div></div>
+          <div class="stat-card"><div class="value" id="stat-albums">0</div><div class="label">Albums</div></div>
+          <div class="stat-card"><div class="value" id="stat-forum">0</div><div class="label">Forum Posts</div></div>
+          <div class="stat-card"><div class="value" id="stat-tickets">0</div><div class="label">Tickets</div></div>
+        </div>
+        <h3 style="font-weight:600;margin-bottom:0.75rem">Recent Activity</h3>
+        <div class="activity-list" id="activity-list">
+          <p class="text-muted" style="text-align:center;padding:1rem">No recent activity.</p>
+        </div>
+        <h3 style="font-weight:600;margin-bottom:0.75rem">System</h3>
+        <div class="system-info">
+          <div class="row"><span class="label">Mode</span><span class="value" id="sys-mode">-</span></div>
+          <div class="row"><span class="label">Version</span><span class="value" id="sys-version">0.1.0</span></div>
+          <div class="row"><span class="label">Modules</span><span class="value" id="sys-modules">-</span></div>
+          <div class="row"><span class="label">Database</span><span class="value" id="sys-db">localStorage</span></div>
+        </div>
       </div>
-      <div class="section-list" id="section-list">
-        <div class="section-item" draggable="true" data-section="about"><span>About</span><span class="text-muted">&#9776;</span></div>
-        <div class="section-item" draggable="true" data-section="skills"><span>Skills</span><span class="text-muted">&#9776;</span></div>
-        <div class="section-item" draggable="true" data-section="projects"><span>Projects</span><span class="text-muted">&#9776;</span></div>
-        <div class="section-item" draggable="true" data-section="contact"><span>Contact</span><span class="text-muted">&#9776;</span></div>
+      <div id="sections-content">
+        <div class="admin-header">
+          <h1>Manage Sections</h1>
+          <p>Drag to reorder. Double-click to edit content.</p>
+        </div>
+        <div class="section-list" id="section-list">
+          <div class="section-item" draggable="true" data-section="about"><span>About</span><span class="text-muted">&#9776;</span></div>
+          <div class="section-item" draggable="true" data-section="skills"><span>Skills</span><span class="text-muted">&#9776;</span></div>
+          <div class="section-item" draggable="true" data-section="projects"><span>Projects</span><span class="text-muted">&#9776;</span></div>
+          <div class="section-item" draggable="true" data-section="contact"><span>Contact</span><span class="text-muted">&#9776;</span></div>
+        </div>
+        <div class="add-btn" onclick="addSection()">+ Add New Section</div>
       </div>
-      <div class="add-btn" onclick="addSection()">+ Add New Section</div>
     </main>
   </div>
   <script src="/assets/js/core.js"></script>
   <script>
-    let draggedItem = null
+    function showDashboard() {
+      document.getElementById('dashboard-content').classList.add('active')
+      document.getElementById('sections-content').classList.remove('active')
+      document.getElementById('nav-dashboard').classList.add('active')
+      document.getElementById('nav-sections').classList.remove('active')
+      updateDashboard()
+    }
+    function showSections() {
+      document.getElementById('dashboard-content').classList.remove('active')
+      document.getElementById('sections-content').classList.add('active')
+      document.getElementById('nav-dashboard').classList.remove('active')
+      document.getElementById('nav-sections').classList.add('active')
+    }
+    function updateDashboard() {
+      var blogPosts = JSON.parse(localStorage.getItem('codefx_blog_posts') || '[]')
+      var albums = JSON.parse(localStorage.getItem('codefx_gallery_albums') || '[]')
+      var forumPosts = JSON.parse(localStorage.getItem('codefx_forum_posts') || '[]')
+      var tickets = JSON.parse(localStorage.getItem('codefx_tickets') || '[]')
+      document.getElementById('stat-posts').textContent = blogPosts.length
+      document.getElementById('stat-albums').textContent = albums.length
+      document.getElementById('stat-forum').textContent = forumPosts.length
+      document.getElementById('stat-tickets').textContent = tickets.length
+      document.getElementById('sys-mode').textContent = document.querySelector('meta[name="codefx-mode"]')?.content || 'static'
+
+      var all = [].concat(
+        blogPosts.map(function(p) { return { text: 'Blog: ' + p.title, time: p.timestamp } }),
+        (albums.reduce(function(a, album) { return a.concat((album.photos || []).map(function(p) { return { text: 'Photo: ' + (p.title || 'untitled'), time: 0 } })) }, []))
+      ).sort(function(a, b) { return b.time - a.time }).slice(0, 10)
+
+      var list = document.getElementById('activity-list')
+      if (all.length) {
+        list.innerHTML = all.map(function(a) {
+          return '<div class="activity-item"><span>' + esc(a.text) + '</span><span class="time">' + (a.time ? timeAgo(a.time) : '') + '</span></div>'
+        }).join('')
+      }
+    }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML }
+    function timeAgo(ts) { var s = Math.floor((Date.now() - ts) / 1000); if (s < 60) return 'just now'; var m = Math.floor(s / 60); if (m < 60) return m + 'm ago'; var h = Math.floor(m / 60); if (h < 24) return h + 'h ago'; var d = Math.floor(h / 24); return d + 'd ago' }
+    updateDashboard()
+    var draggedItem = null
     document.querySelectorAll('.section-item').forEach(function(item) {
       item.addEventListener('dragstart', function() { draggedItem = this; this.classList.add('dragging') })
       item.addEventListener('dragend', function() { this.classList.remove('dragging'); draggedItem = null })
-      item.addEventListener('dragover', function(e) {
-        e.preventDefault()
-        document.querySelectorAll('.section-item').forEach(function(i) { i.classList.remove('drag-over') })
-        this.classList.add('drag-over')
-      })
+      item.addEventListener('dragover', function(e) { e.preventDefault(); document.querySelectorAll('.section-item').forEach(function(i) { i.classList.remove('drag-over') }); this.classList.add('drag-over') })
       item.addEventListener('dragleave', function() { this.classList.remove('drag-over') })
       item.addEventListener('drop', function(e) {
-        e.preventDefault()
-        this.classList.remove('drag-over')
-        if (draggedItem && draggedItem !== this) {
-          var parent = this.parentNode
-          var items = Array.from(parent.children)
-          var fromIdx = items.indexOf(draggedItem)
-          var toIdx = items.indexOf(this)
-          if (fromIdx < toIdx) { this.after(draggedItem) } else { this.before(draggedItem) }
-          saveOrder()
-        }
+        e.preventDefault(); this.classList.remove('drag-over')
+        if (draggedItem && draggedItem !== this) { var parent = this.parentNode; var items = Array.from(parent.children); var fromIdx = items.indexOf(draggedItem); var toIdx = items.indexOf(this); if (fromIdx < toIdx) { this.after(draggedItem) } else { this.before(draggedItem) }; saveOrder() }
       })
     })
     function addSection() {
