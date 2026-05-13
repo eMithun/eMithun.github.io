@@ -1,10 +1,13 @@
 const CodeFX = {
   config: {},
+  events: {},
 
   init(config) {
     this.config = config
     this.initTheme()
     this.initNavigation()
+    this.initScrollAnimations()
+    this.initSmoothScroll()
     this.emit('ready')
   },
 
@@ -24,20 +27,48 @@ const CodeFX = {
   },
 
   initNavigation() {
+    const toggle = document.getElementById('theme-toggle')
+    if (toggle) toggle.addEventListener('click', () => this.toggleTheme())
+    const menuToggle = document.getElementById('mobile-menu-toggle')
+    const nav = document.getElementById('main-nav')
+    if (menuToggle && nav) {
+      menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('open')
+        menuToggle.setAttribute('aria-expanded', nav.classList.contains('open'))
+      })
+    }
+  },
+
+  initScrollAnimations() {
+    if (typeof IntersectionObserver === 'undefined') return
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
+    document.querySelectorAll('.animate-in, .animate-in-left, .animate-in-right, .animate-in-scale').forEach(el => observer.observe(el))
+  },
+
+  initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', e => {
+        const href = anchor.getAttribute('href')
+        if (href === '#') return
         e.preventDefault()
-        const target = document.querySelector(anchor.getAttribute('href'))
-        if (target) target.scrollIntoView({ behavior: 'smooth' })
+        const target = document.querySelector(href)
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
       })
     })
   },
 
-  events: {},
   on(event, handler) {
     (this.events[event] = this.events[event] || []).push(handler)
     return this
   },
+
   emit(event, data) {
     (this.events[event] || []).forEach(h => h(data))
     return this
@@ -45,9 +76,8 @@ const CodeFX = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const config = JSON.parse(
-    document.getElementById('codefx-config')?.textContent || '{}'
-  )
+  const script = document.getElementById('codefx-config')
+  const config = script ? JSON.parse(script.textContent || '{}') : {}
   CodeFX.init(config)
 })
 

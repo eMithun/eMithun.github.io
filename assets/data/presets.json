@@ -1,47 +1,74 @@
 {
   "modern": {
-    "name": "Modern",
+    "name": "Modern Indigo",
     "colors": {
-      "primary": "#3b82f6",
-      "secondary": "#8b5cf6",
+      "primary": "#6366f1",
+      "secondary": "#06b6d4",
       "accent": "#f59e0b"
     },
     "darkMode": true
   },
   "minimal": {
-    "name": "Minimal",
+    "name": "Minimal Dark",
     "colors": {
-      "primary": "#1a1a2e",
-      "secondary": "#16213e",
+      "primary": "#1e293b",
+      "secondary": "#334155",
       "accent": "#e94560"
     },
-    "darkMode": false
+    "darkMode": true
   },
   "nature": {
-    "name": "Nature",
+    "name": "Nature Green",
     "colors": {
-      "primary": "#166534",
-      "secondary": "#15803d",
-      "accent": "#facc15"
+      "primary": "#059669",
+      "secondary": "#10b981",
+      "accent": "#f59e0b"
     },
     "darkMode": true
   },
   "creative": {
-    "name": "Creative",
+    "name": "Creative Coral",
     "colors": {
-      "primary": "#6d28d9",
-      "secondary": "#db2777",
+      "primary": "#ec4899",
+      "secondary": "#8b5cf6",
       "accent": "#f97316"
     },
     "darkMode": true
   },
   "professional": {
-    "name": "Professional",
+    "name": "Professional Blue",
     "colors": {
-      "primary": "#1e3a5f",
-      "secondary": "#2d5a87",
-      "accent": "#c99700"
+      "primary": "#2563eb",
+      "secondary": "#7c3aed",
+      "accent": "#d97706"
     },
     "darkMode": false
+  },
+  "sunset": {
+    "name": "Sunset Vibes",
+    "colors": {
+      "primary": "#f43f5e",
+      "secondary": "#fb923c",
+      "accent": "#fbbf24"
+    },
+    "darkMode": true
+  },
+  "ocean": {
+    "name": "Ocean Deep",
+    "colors": {
+      "primary": "#0ea5e9",
+      "secondary": "#06b6d4",
+      "accent": "#10b981"
+    },
+    "darkMode": true
+  },
+  "midnight": {
+    "name": "Midnight Purple",
+    "colors": {
+      "primary": "#7c3aed",
+      "secondary": "#a78bfa",
+      "accent": "#f472b6"
+    },
+    "darkMode": true
   }
 }
