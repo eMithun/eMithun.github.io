@@ -1,8 +1,15 @@
 (function(){'use strict';
 function addSSOButtons() {
-  var loginForm = document.querySelector('.auth-form') || document.getElementById('login-form')
-  if (!loginForm || document.querySelector('.sso-buttons')) return
-  var providers = JSON.parse(localStorage.getItem('codefx_sso_providers') || '["google","github"]')
+  var forms = document.querySelectorAll('#codefx-login-form, .auth-form, #login-form')
+  if (!forms.length) return
+  var loginForm = forms[0]
+  if (loginForm.querySelector('.sso-buttons')) return
+  var modeEl = document.querySelector('meta[name="codefx-mode"]')
+  var mode = modeEl ? modeEl.content : 'static'
+  var providers = []
+  if (mode === 'static') {
+    providers = JSON.parse(localStorage.getItem('codefx_sso_providers') || '[]')
+  }
   var ssoDiv = document.createElement('div')
   ssoDiv.className = 'sso-buttons'
   var label = document.createElement('p')
@@ -20,5 +27,11 @@ function addSSOButtons() {
   })
   loginForm.appendChild(ssoDiv)
 }
-document.addEventListener('DOMContentLoaded', addSSOButtons)
+function initSSO() {
+  addSSOButtons()
+  var observer = new MutationObserver(function() { addSSOButtons() })
+  observer.observe(document.body, { childList: true, subtree: true })
+}
+document.addEventListener('DOMContentLoaded', initSSO)
+window.CodeFX && CodeFX.on('auth:showModal', initSSO)
 })();

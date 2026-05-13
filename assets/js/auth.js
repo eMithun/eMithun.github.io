@@ -3,6 +3,8 @@
 
   const AUTH_KEY = 'codefx_session'
   const SECRET_TRIGGER = 'Control+Shift+L'
+  const SESSION_DURATION = 604800000
+  const MIN_PW_LEN = 8
   let loginModal = null
   let isLoggedIn = !!localStorage.getItem(AUTH_KEY)
   let hiddenClickCount = 0
@@ -113,6 +115,7 @@
   }
 
   async function handleRegister(name, email, password) {
+    if (password.length < MIN_PW_LEN) { alert('Password must be at least ' + MIN_PW_LEN + ' characters'); return }
     const mode = document.querySelector('meta[name="codefx-mode"]')?.content || 'static'
     if (mode === 'static') {
       localStorage.setItem(AUTH_KEY, JSON.stringify({ email, name, loginTime: Date.now() }))
