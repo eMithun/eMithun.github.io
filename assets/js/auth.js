@@ -2,13 +2,12 @@
   'use strict'
 
   const ADMIN_EMAIL = 'admin@codefx.dev'
-  const PW_HASH = '21e9a8bb165ea25a6a8418feb633ca2b990ef254d529a3f54553e0bfc0bfb357'
-  const PW_SALT = '20b55c13e0a6739eb17bd18aae7793cb'
+  const PW_HASH = '504d3ffffbb80bef4e6cd90ad2679fe5e954d51e2becb6118e6f36d94eab5f3d'
+  const PW_SALT = '76687a8f71fbd4de32411f37c3cef9b0'
   const AUTH_KEY = 'codefx_session'
   const SESSION_DURATION = 604800000
   const MAX_ATTEMPTS = 5
   const COOLDOWN_MS = 60000
-  const SECRET_TRIGGER = 'Control+Shift+L'
   let loginModal = null
   let isLoggedIn = false
   let loginAttempts = 0
@@ -26,7 +25,45 @@
         isLoggedIn = false; return
       }
       isLoggedIn = session.email === ADMIN_EMAIL
+      if (isLoggedIn) injectUserPanel(session)
     } catch { localStorage.removeItem(AUTH_KEY); isLoggedIn = false }
+  }
+
+  function injectUserPanel(session) {
+    var el = document.getElementById('auth-state')
+    if (!el) return
+    var initial = (session.email || 'U')[0].toUpperCase()
+    el.innerHTML = '<div class="auth-user-panel">' +
+      '<div class="auth-avatar" onclick="toggleAccountPanel()">' + initial + '</div>' +
+      '<span class="auth-username">' + (session.name || session.email || 'User') + '</span>' +
+      '<a href="/admin" class="btn btn-primary" style="padding:0.375rem 0.75rem;font-size:0.8rem">Dashboard</a>' +
+      '</div>'
+  }
+
+  window.toggleAccountPanel = function() {
+    var existing = document.getElementById('account-panel')
+    if (existing) { existing.remove(); return }
+    var raw = localStorage.getItem(AUTH_KEY)
+    if (!raw) return
+    var s = JSON.parse(raw)
+    var initial = (s.email || 'U')[0].toUpperCase()
+    var panel = document.createElement('div')
+    panel.id = 'account-panel'
+    panel.innerHTML = '<div class="account-overlay" onclick="this.parentElement.remove()">' +
+      '<div class="account-panel" onclick="event.stopPropagation()">' +
+      '<button class="account-close" onclick="this.closest(\'#account-panel\').remove()">&times;</button>' +
+      '<div class="account-header">' +
+      '<div class="account-avatar-large">' + initial + '</div>' +
+      '<div><h3>' + (s.name || s.email || 'User') + '</h3><p class="text-muted">' + (s.email || '') + '</p></div>' +
+      '</div>' +
+      '<div class="account-section">' +
+      '<label>Email<input type="email" value="' + (s.email || '') + '" disabled></label>' +
+      '<label>Username<input type="text" value="' + (s.name || '') + '" disabled></label>' +
+      '</div>' +
+      '<hr style="border-color:var(--color-border);margin:1rem 0">' +
+      '<button class="btn btn-outline" onclick="handleLogout();this.closest(\'#account-panel\').remove()" style="width:100%;justify-content:center">Sign Out</button>' +
+      '</div></div>'
+    document.body.appendChild(panel)
   }
 
   async function hashPass(password) {
@@ -42,15 +79,14 @@
   document.addEventListener('keydown', function(e) {
     const combo = [e.ctrlKey || e.metaKey ? 'Control' : '', e.shiftKey ? 'Shift' : '', e.key.toUpperCase()]
       .filter(Boolean).join('+')
-    if (combo === SECRET_TRIGGER) {
+    if (combo === 'Control+Shift+L') {
       e.preventDefault()
       toggleLoginModal()
     }
   })
 
   document.addEventListener('click', function(e) {
-    const btn = e.target.closest('#login-toggle')
-    if (btn) { e.preventDefault(); toggleLoginModal(); return }
+    if (e.target.closest('#account-panel') || e.target.closest('.auth-avatar')) return
     if (!e.target.closest('header')) return
     hiddenClickCount++
     clearTimeout(clickTimer)
@@ -62,7 +98,7 @@
   })
 
   function toggleLoginModal() {
-    if (isLoggedIn) { showProfile(); return }
+    if (isLoggedIn) { toggleAccountPanel(); return }
     if (loginModal) { loginModal.remove(); loginModal = null; return }
     showLoginModal()
   }
@@ -124,34 +160,21 @@
       return
     }
     loginAttempts = 0
-    localStorage.setItem(AUTH_KEY, JSON.stringify({ email, name: ADMIN_EMAIL.split('@')[0], loginTime: Date.now() }))
+    var session = { email, name: ADMIN_EMAIL.split('@')[0], loginTime: Date.now() }
+    localStorage.setItem(AUTH_KEY, JSON.stringify(session))
     isLoggedIn = true
     loginModal.remove(); loginModal = null
+    injectUserPanel(session)
     window.CodeFX && CodeFX.emit('auth:login', { email })
-    window.location.href = '/admin'
-  }
-
-  function showProfile() {
-    var raw = localStorage.getItem(AUTH_KEY)
-    var user = raw ? JSON.parse(raw) : {}
-    loginModal = document.createElement('div')
-    loginModal.id = 'codefx-login-modal'
-    loginModal.innerHTML = '<div class="codefx-modal-overlay">' +
-      '<div class="codefx-modal">' +
-      '<button class="codefx-modal-close" onclick="this.closest(\'#codefx-login-modal\').remove(); loginModal=null">&times;</button>' +
-      '<h2>Profile</h2>' +
-      '<p><strong>' + (user.name || user.email || 'User') + '</strong></p>' +
-      '<p class="text-muted">' + (user.email || '') + '</p>' +
-      '<hr style="margin:1rem 0;border-color:var(--color-border)">' +
-      '<button class="btn btn-outline" onclick="handleLogout()" style="width:100%;justify-content:center">Sign Out</button>' +
-      '</div></div>'
-    document.body.appendChild(loginModal)
   }
 
   window.handleLogout = function() {
     localStorage.removeItem(AUTH_KEY)
     isLoggedIn = false
-    if (loginModal) { loginModal.remove(); loginModal = null }
+    var el = document.getElementById('auth-state')
+    if (el) el.innerHTML = ''
+    var panel = document.getElementById('account-panel')
+    if (panel) panel.remove()
     window.CodeFX && CodeFX.emit('auth:logout')
   }
 
