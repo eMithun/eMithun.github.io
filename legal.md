@@ -13,7 +13,7 @@ All source code, design elements, text, graphics, and documentation on emithun.g
 If you believe that any material on this site infringes upon your copyright, or if you need to report someone copying work from this profile, please contact:
 
 * **Contact Name:** [Mithun Hasan](https://eMithun.github.io).
-* **Email:** emithun@mail.com
+* **Email:** [Email Me](mailto:emithun@mail.com)
 * **Subject Line:** Copyright Support / DMCA Claim
 
 Please include a description of the copyrighted work, the specific URL location of the dispute, and your contact information.
