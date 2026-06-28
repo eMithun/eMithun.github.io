@@ -73,7 +73,7 @@
           <p class="section-subtitle">Explore my work across GitHub organizations</p>
         </div>
         <div class="grid stagger-children" id="projects-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem">
-          <!-- Projects will be loaded via JS -->
+          <!-- Projects will be loaded here -->
         </div>
       </div>
     </section>
@@ -90,92 +90,70 @@
   <script src="/assets/js/auth.js"></script>
   <script src="/assets/js/sso.js"></script>
   <script>
-    // Load and render projects
-    async function loadProjects() {
+    // Default projects (fallback)
+    const defaultProjects = [
+      { id: 1, name: 'CodeFX', description: 'Modular multi-platform web framework', tags: ['Web', 'Framework'], status: 'live', version: 'v1.0.0', githubUrl: 'https://github.com/eMithun/CodeFX', trackingUrl: '', devices: ['Desktop', 'Mobile'] },
+      { id: 2, name: 'Photography Portfolio', description: 'Professional photography showcase', tags: ['Photography', 'Portfolio'], status: 'maintenance', version: 'v2.1.0', githubUrl: '', trackingUrl: '', devices: ['Desktop', 'Mobile', 'Tablet'] },
+      { id: 3, name: 'Garden Shop', description: 'Plant shop with fertilizer & tools', tags: ['E-Commerce', 'Plants'], status: 'offline', version: 'v0.5.0', githubUrl: '', trackingUrl: '', devices: ['Desktop'] }
+    ]
+
+    function getProjects() {
       try {
-        const response = await fetch('/assets/data/projects.json');
-        const projects = await response.json();
-        renderProjects(projects);
-      } catch (error) {
-        console.error('Error loading projects:', error);
-        renderProjects([
-          {
-            id: 1,
-            name: "CodeFX",
-            description: "Modular multi-platform web framework",
-            tags: ["Web", "Framework"],
-            status: "live",
-            version: "v1.0.0",
-            githubUrl: "https://github.com/eMithun/CodeFX",
-            trackingUrl: "https://status.example.com/codefx",
-            devices: ["Desktop", "Mobile"]
-          }
-        ]);
+        return JSON.parse(localStorage.getItem('codefx_projects') || 'null') || defaultProjects
+      } catch {
+        return defaultProjects
       }
     }
 
-    function renderProjects(projects) {
-      const grid = document.getElementById('projects-grid');
-      grid.innerHTML = projects.map(project => {
-        let statusBg = '';
-        switch(project.status) {
-          case 'live': statusBg = 'var(--color-success)'; break;
-          case 'maintenance': statusBg = 'var(--color-warning)'; break;
-          case 'offline': statusBg = 'var(--color-error)'; break;
-        }
-        
-        return `
+    function renderProjects() {
+      const grid = document.getElementById('projects-grid')
+      const projects = getProjects()
+
+      grid.innerHTML = projects.map(project => `
         <div class="project-card animate-in" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.75rem; transition: all 0.3s ease; position: relative; overflow: hidden;">
           <div class="project-icon" style="width:48px;height:48px;border-radius:var(--radius-lg);background:var(--color-gradient-1);display:flex;align-items:center;justify-content:center;color:white;font-size:1.25rem;font-weight:700;margin-bottom:1rem">
             ${project.name.charAt(0).toUpperCase()}
           </div>
           <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
             <h3 style="font-size:1.1rem;font-weight:700;margin:0">${project.name}</h3>
-            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem;background:${statusBg};color:white">${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
+            <span class="badge status-${project.status}" style="font-size:0.65rem;padding:0.15rem 0.5rem">${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
           </div>
           <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:1rem">${project.description}</p>
-          
           <div style="display:flex;gap:0.375rem;flex-wrap:wrap;margin-bottom:1rem">
             ${project.tags.map(tag => `<span style="padding:0.2rem 0.6rem;border-radius:var(--radius-md);font-size:0.75rem;background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text-muted)">${tag}</span>`).join('')}
           </div>
-
           <div class="project-meta">
             <div class="meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7l3-7z"/>
-              </svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 21l2-7L2 9h7l3-7z"/></svg>
               <span>Version: ${project.version}</span>
             </div>
             <div class="meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-              </svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
               <span>Devices: ${project.devices.join(', ')}</span>
             </div>
+            ${project.githubUrl ? `
             <div class="meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
-              </svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
               <a href="${project.githubUrl}" target="_blank" style="color:var(--color-primary);text-decoration:none">GitHub</a>
             </div>
+            ` : ''}
+            ${project.trackingUrl ? `
             <div class="meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               <a href="${project.trackingUrl}" target="_blank" style="color:var(--color-primary);text-decoration:none">Status</a>
             </div>
+            ` : ''}
           </div>
         </div>
-      `}).join('');
+      `).join('')
 
-      // Add animation to new elements
+      // Add animations
       setTimeout(() => {
-        document.querySelectorAll('.animate-in').forEach(el => el.classList.add('visible'));
-      }, 100);
+        document.querySelectorAll('.animate-in').forEach(el => el.classList.add('visible'))
+      }, 100)
     }
 
-    document.addEventListener('DOMContentLoaded', loadProjects);
+    document.addEventListener('DOMContentLoaded', renderProjects)
   </script>
 </body>
 </html>
