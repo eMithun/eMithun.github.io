@@ -96,6 +96,7 @@
         <a href="/projects" class="nav-link active">Projects</a>
         <a href="/contact" class="nav-link ">Contact</a>
         <a href="/blog" class="nav-link">Blog</a>
+        <a href="/legal" class="nav-link">Legal</a>
         <a href="/gallery" class="nav-link">Gallery</a>
         <div id="auth-state"></div>
         <button id="theme-toggle" class="btn-ghost" style="width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg);border:1px solid var(--color-border);cursor:pointer;background:transparent" aria-label="Toggle theme">
@@ -115,27 +116,45 @@
         <h2 class="section-title">Featured Projects</h2>
         <p class="section-subtitle">Things I've built and contributed to</p>
       </div>
-      <div class="grid stagger-children" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem">
+      <div class="grid stagger-children" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem" id="projects-grid">
         
         <div class="project-card animate-in">
           <div class="project-icon">F</div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem" data-edit="project-1">CodeFX</h3>
-          <p style="color:var(--color-text-secondary);font-size:0.9rem" data-edit="project-1-desc">Modular multi-platform web framework</p>
-          
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+            <h3 style="font-size:1.1rem;font-weight:700;margin:0" data-edit="project-1">CodeFX</h3>
+            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem" id="p1-status">Live</span>
+          </div>
+          <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:0.75rem" data-edit="project-1-desc">Modular multi-platform web framework</p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="project-tag">Web</span>
+            <span class="project-tag">Framework</span>
+          </div>
         </div>
         
         <div class="project-card animate-in">
           <div class="project-icon">P</div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem" data-edit="project-2">Photography Portfolio</h3>
-          <p style="color:var(--color-text-secondary);font-size:0.9rem" data-edit="project-2-desc">Professional photography showcase</p>
-          
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+            <h3 style="font-size:1.1rem;font-weight:700;margin:0" data-edit="project-2">Photography Portfolio</h3>
+            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem;background:var(--color-warning)" id="p2-status">Maintenance</span>
+          </div>
+          <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:0.75rem" data-edit="project-2-desc">Professional photography showcase</p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="project-tag">Photography</span>
+            <span class="project-tag">Portfolio</span>
+          </div>
         </div>
         
         <div class="project-card animate-in">
           <div class="project-icon">G</div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem" data-edit="project-3">Garden Shop</h3>
-          <p style="color:var(--color-text-secondary);font-size:0.9rem" data-edit="project-3-desc">Plant shop with fertilizer &amp; tools</p>
-          
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+            <h3 style="font-size:1.1rem;font-weight:700;margin:0" data-edit="project-3">Garden Shop</h3>
+            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem;background:var(--color-error)" id="p3-status">Offline</span>
+          </div>
+          <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:0.75rem" data-edit="project-3-desc">Plant shop with fertilizer &amp; tools</p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="project-tag">E-Commerce</span>
+            <span class="project-tag">Plants</span>
+          </div>
         </div>
       </div>
     </div>
