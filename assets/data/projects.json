@@ -7,7 +7,7 @@
     "status": "live",
     "version": "v1.0.0",
     "githubUrl": "https://github.com/eMithun/CodeFX",
-    "trackingUrl": "https://status.example.com/codefx",
+    "trackingUrl": "",
     "devices": ["Desktop", "Mobile"]
   },
   {
@@ -17,8 +17,8 @@
     "tags": ["Photography", "Portfolio"],
     "status": "maintenance",
     "version": "v2.1.0",
-    "githubUrl": "https://github.com/eMithun/photography-portfolio",
-    "trackingUrl": "https://status.example.com/portfolio",
+    "githubUrl": "",
+    "trackingUrl": "",
     "devices": ["Desktop", "Mobile", "Tablet"]
   },
   {
@@ -28,19 +28,8 @@
     "tags": ["E-Commerce", "Plants"],
     "status": "offline",
     "version": "v0.5.0",
-    "githubUrl": "https://github.com/eMithun/garden-shop",
-    "trackingUrl": "https://status.example.com/garden",
+    "githubUrl": "",
+    "trackingUrl": "",
     "devices": ["Desktop"]
-  },
-  {
-    "id": 4,
-    "name": "My Awesome Project",
-    "description": "Your project description here",
-    "tags": ["Add", "Tags", "Here"],
-    "status": "live",
-    "version": "vX.X.X",
-    "githubUrl": "https://github.com/your-org/your-project",
-    "trackingUrl": "https://status.yourdomain.com/your-project",
-    "devices": ["Desktop", "Mobile", "IoT"]
   }
 ]

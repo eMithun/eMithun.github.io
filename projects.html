@@ -33,9 +33,6 @@
     .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .project-meta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
     .meta-item { display: flex; align-items: center; gap: 0.375rem; font-size: 0.8rem; color: var(--color-text-secondary); }
-    .status-live { background: var(--color-success); color: white; }
-    .status-maintenance { background: var(--color-warning); color: white; }
-    .status-offline { background: var(--color-error); color: white; }
     @media (max-width: 768px) {
       .mobile-menu-btn { display: flex; }
       .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-background); border-bottom: 1px solid var(--color-border); padding: 1rem; flex-direction: column; gap: 0.5rem; box-shadow: var(--shadow-lg); }
@@ -73,7 +70,7 @@
           <p class="section-subtitle">Explore my work across GitHub organizations</p>
         </div>
         <div class="grid stagger-children" id="projects-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem">
-          <!-- Projects will be loaded here -->
+          <!-- Projects will be loaded from JSON file -->
         </div>
       </div>
     </section>
@@ -90,25 +87,36 @@
   <script src="/assets/js/auth.js"></script>
   <script src="/assets/js/sso.js"></script>
   <script>
-    // Default projects (fallback)
+    // Default fallback projects
     const defaultProjects = [
       { id: 1, name: 'CodeFX', description: 'Modular multi-platform web framework', tags: ['Web', 'Framework'], status: 'live', version: 'v1.0.0', githubUrl: 'https://github.com/eMithun/CodeFX', trackingUrl: '', devices: ['Desktop', 'Mobile'] },
       { id: 2, name: 'Photography Portfolio', description: 'Professional photography showcase', tags: ['Photography', 'Portfolio'], status: 'maintenance', version: 'v2.1.0', githubUrl: '', trackingUrl: '', devices: ['Desktop', 'Mobile', 'Tablet'] },
       { id: 3, name: 'Garden Shop', description: 'Plant shop with fertilizer & tools', tags: ['E-Commerce', 'Plants'], status: 'offline', version: 'v0.5.0', githubUrl: '', trackingUrl: '', devices: ['Desktop'] }
     ]
 
-    function getProjects() {
-      try {
-        return JSON.parse(localStorage.getItem('codefx_projects') || 'null') || defaultProjects
-      } catch {
-        return defaultProjects
+    // Status badge colors
+    function getStatusColor(status) {
+      switch(status) {
+        case 'live': return 'var(--color-success)';
+        case 'maintenance': return 'var(--color-warning)';
+        case 'offline': return 'var(--color-error)';
+        default: return 'var(--color-primary)';
       }
     }
 
-    function renderProjects() {
-      const grid = document.getElementById('projects-grid')
-      const projects = getProjects()
+    // Load and render projects
+    async function renderProjects() {
+      let projects;
+      try {
+        const response = await fetch('/assets/data/projects.json');
+        if (response.ok) projects = await response.json();
+        else throw new Error('Failed to load');
+      } catch (error) {
+        console.warn('Using fallback projects:', error);
+        projects = defaultProjects;
+      }
 
+      const grid = document.getElementById('projects-grid');
       grid.innerHTML = projects.map(project => `
         <div class="project-card animate-in" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.75rem; transition: all 0.3s ease; position: relative; overflow: hidden;">
           <div class="project-icon" style="width:48px;height:48px;border-radius:var(--radius-lg);background:var(--color-gradient-1);display:flex;align-items:center;justify-content:center;color:white;font-size:1.25rem;font-weight:700;margin-bottom:1rem">
@@ -116,7 +124,7 @@
           </div>
           <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
             <h3 style="font-size:1.1rem;font-weight:700;margin:0">${project.name}</h3>
-            <span class="badge status-${project.status}" style="font-size:0.65rem;padding:0.15rem 0.5rem">${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
+            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem;background:${getStatusColor(project.status)};color:white">${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
           </div>
           <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:1rem">${project.description}</p>
           <div style="display:flex;gap:0.375rem;flex-wrap:wrap;margin-bottom:1rem">
@@ -147,7 +155,7 @@
         </div>
       `).join('')
 
-      // Add animations
+      // Animate in
       setTimeout(() => {
         document.querySelectorAll('.animate-in').forEach(el => el.classList.add('visible'))
       }, 100)
