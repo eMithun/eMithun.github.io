@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "CodeFX",
+    "description": "Modular multi-platform web framework",
+    "tags": ["Web", "Framework"],
+    "status": "live",
+    "version": "v1.0.0",
+    "githubUrl": "https://github.com/eMithun/CodeFX",
+    "trackingUrl": "https://status.example.com/codefx",
+    "devices": ["Desktop", "Mobile"]
+  },
+  {
+    "id": 2,
+    "name": "Photography Portfolio",
+    "description": "Professional photography showcase",
+    "tags": ["Photography", "Portfolio"],
+    "status": "maintenance",
+    "version": "v2.1.0",
+    "githubUrl": "https://github.com/eMithun/photography-portfolio",
+    "trackingUrl": "https://status.example.com/portfolio",
+    "devices": ["Desktop", "Mobile", "Tablet"]
+  },
+  {
+    "id": 3,
+    "name": "Garden Shop",
+    "description": "Plant shop with fertilizer & tools",
+    "tags": ["E-Commerce", "Plants"],
+    "status": "offline",
+    "version": "v0.5.0",
+    "githubUrl": "https://github.com/eMithun/garden-shop",
+    "trackingUrl": "https://status.example.com/garden",
+    "devices": ["Desktop"]
+  },
+  {
+    "id": 4,
+    "name": "My Awesome Project",
+    "description": "Your project description here",
+    "tags": ["Add", "Tags", "Here"],
+    "status": "live",
+    "version": "vX.X.X",
+    "githubUrl": "https://github.com/your-org/your-project",
+    "trackingUrl": "https://status.yourdomain.com/your-project",
+    "devices": ["Desktop", "Mobile", "IoT"]
+  }
+]

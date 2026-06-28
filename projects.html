@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="codefx-mode" content="static">
-  <meta name="description" content="Programmer, designer, photographer &amp; gardener">
+  <meta name="description" content="Programmer, designer, photographer & gardener">
   <meta property="og:title" content="Mithun Hasan">
-  <meta property="og:description" content="Programmer, designer, photographer &amp; gardener">
+  <meta property="og:description" content="Programmer, designer, photographer & gardener">
   <meta property="og:image" content="">
   <meta property="og:url" content="https://eMithun.github.io/projects">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mithun Hasan">
-  <meta name="twitter:description" content="Programmer, designer, photographer &amp; gardener">
+  <meta name="twitter:description" content="Programmer, designer, photographer & gardener">
   <meta name="twitter:image" content="">
-  <title>Projects — Mithun Hasan</title>
+  <title>Projects - Mithun Hasan</title>
   <link rel="stylesheet" href="/assets/css/reset.css">
   <link rel="stylesheet" href="/assets/css/variables.css">
   <link rel="stylesheet" href="/assets/css/utilities.css">
@@ -28,61 +28,20 @@
     .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-primary); transition: width 0.2s; border-radius: 1px; }
     .nav-link:hover, .nav-link.active { color: var(--color-primary); }
     .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-    .hero { min-height: 85vh; display: flex; align-items: center; position: relative; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background: var(--color-gradient-1); opacity: 0.03; z-index: 0; }
-    .hero-bg::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: var(--color-primary); opacity: 0.03; top: -200px; right: -200px; }
-    .hero-bg::after { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: var(--color-secondary); opacity: 0.03; bottom: -100px; left: -100px; }
-    .hero-content { position: relative; z-index: 1; max-width: 48rem; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.375rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 500; background: var(--color-primary); color: white; margin-bottom: 1.5rem; }
-    .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
-    .hero-title .highlight { background: var(--color-gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-desc { font-size: 1.2rem; color: var(--color-text-secondary); line-height: 1.7; max-width: 36rem; margin-bottom: 2rem; }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
-    .section-subtitle { color: var(--color-text-muted); font-size: 1.05rem; margin-bottom: 3rem; max-width: 32rem; }
-    .skill-bar-track { height: 8px; background: var(--color-border); border-radius: 999px; overflow: hidden; margin-top: 0.75rem; }
-    .skill-bar-fill { height: 100%; background: var(--color-gradient-1); border-radius: 999px; width: 0; transition: width 1s ease; }
-    .skill-bar-fill.visible { }
-    .project-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.75rem; transition: all 0.3s ease; position: relative; overflow: hidden; }
-    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--color-gradient-1); opacity: 0; transition: opacity 0.3s; }
-    .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
-    .project-card:hover::before { opacity: 1; }
-    .project-icon { width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--color-gradient-1); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 1rem; }
-    .project-tag { padding: 0.2rem 0.6rem; border-radius: var(--radius-md); font-size: 0.75rem; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-muted); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .contact-info h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .contact-info p { color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 2rem; }
-    .contact-method { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; }
-    .contact-method-icon { width: 40px; height: 40px; border-radius: var(--radius-lg); background: var(--color-surface); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .contact-method-text { font-size: 0.9rem; }
-    .contact-method-label { font-size: 0.75rem; color: var(--color-text-muted); }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.375rem; color: var(--color-text-secondary); }
-    .form-input, .form-textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); font-size: 0.9rem; transition: border-color 0.2s, box-shadow 0.2s; }
-    .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
-    .form-textarea { min-height: 120px; resize: vertical; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-    .about-stat { text-align: center; padding: 1.5rem; background: var(--color-surface); border-radius: var(--radius-xl); border: 1px solid var(--color-border); }
-    .about-stat-value { font-size: 2rem; font-weight: 800; background: var(--color-gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .about-stat-label { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem; }
     .header-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: rgba(255,255,255,0.8); }
-    [data-theme="dark"] .header-blur { background: rgba(11, 17, 33, 0.8); }
+    [data-theme="dark"] .header-blur { background: rgba(11, 17, 33, 0.85); }
     .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: var(--color-text); border-radius: 2px; transition: all 0.3s; }
+    .project-meta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+    .meta-item { display: flex; align-items: center; gap: 0.375rem; font-size: 0.8rem; color: var(--color-text-secondary); }
+    .status-live { background: var(--color-success); color: white; }
+    .status-maintenance { background: var(--color-warning); color: white; }
+    .status-offline { background: var(--color-error); color: white; }
     @media (max-width: 768px) {
-      .hero-title { font-size: 2.2rem; }
-      .hero { min-height: 70vh; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .mobile-menu-btn { display: flex; }
       .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-background); border-bottom: 1px solid var(--color-border); padding: 1rem; flex-direction: column; gap: 0.5rem; box-shadow: var(--shadow-lg); }
       .nav-links.open { display: flex; }
       .nav-link { padding: 0.75rem 1rem; }
-      .section-title { font-size: 1.6rem; }
-      .about-stats { grid-template-columns: repeat(2, 1fr); }
     }
-    [data-theme="dark"] .header-blur { background: rgba(11, 17, 33, 0.85); }
   </style>
 </head>
 <body>
@@ -91,10 +50,10 @@
       <a href="/" style="font-weight:800;font-size:1.15rem;letter-spacing:-0.02em;color:var(--color-text)">Mithun Hasan</a>
       <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
       <nav class="flex items-center gap-lg nav-links" id="main-nav">
-        <a href="/" class="nav-link ">Home</a>
-        <a href="/about" class="nav-link ">About</a>
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About</a>
         <a href="/projects" class="nav-link active">Projects</a>
-        <a href="/contact" class="nav-link ">Contact</a>
+        <a href="/contact" class="nav-link">Contact</a>
         <a href="/blog" class="nav-link">Blog</a>
         <a href="/legal" class="nav-link">Legal</a>
         <a href="/gallery" class="nav-link">Gallery</a>
@@ -107,64 +66,22 @@
   </header>
 
   <main>
-    
-    
-    
-  <section class="section section-alt">
-    <div class="container">
-      <div class="animate-in">
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">Things I've built and contributed to</p>
-      </div>
-      <div class="grid stagger-children" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem" id="projects-grid">
-        
-        <div class="project-card animate-in">
-          <div class="project-icon">F</div>
-          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
-            <h3 style="font-size:1.1rem;font-weight:700;margin:0" data-edit="project-1">CodeFX</h3>
-            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem" id="p1-status">Live</span>
-          </div>
-          <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:0.75rem" data-edit="project-1-desc">Modular multi-platform web framework</p>
-          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-            <span class="project-tag">Web</span>
-            <span class="project-tag">Framework</span>
-          </div>
+    <section class="section section-alt">
+      <div class="container">
+        <div class="animate-in">
+          <h2 class="section-title">My Projects</h2>
+          <p class="section-subtitle">Explore my work across GitHub organizations</p>
         </div>
-        
-        <div class="project-card animate-in">
-          <div class="project-icon">P</div>
-          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
-            <h3 style="font-size:1.1rem;font-weight:700;margin:0" data-edit="project-2">Photography Portfolio</h3>
-            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem;background:var(--color-warning)" id="p2-status">Maintenance</span>
-          </div>
-          <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:0.75rem" data-edit="project-2-desc">Professional photography showcase</p>
-          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-            <span class="project-tag">Photography</span>
-            <span class="project-tag">Portfolio</span>
-          </div>
-        </div>
-        
-        <div class="project-card animate-in">
-          <div class="project-icon">G</div>
-          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
-            <h3 style="font-size:1.1rem;font-weight:700;margin:0" data-edit="project-3">Garden Shop</h3>
-            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem;background:var(--color-error)" id="p3-status">Offline</span>
-          </div>
-          <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:0.75rem" data-edit="project-3-desc">Plant shop with fertilizer &amp; tools</p>
-          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-            <span class="project-tag">E-Commerce</span>
-            <span class="project-tag">Plants</span>
-          </div>
+        <div class="grid stagger-children" id="projects-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem">
+          <!-- Projects will be loaded via JS -->
         </div>
       </div>
-    </div>
-  </section>
-    
+    </section>
   </main>
 
   <footer style="border-top:1px solid var(--color-border);padding:3rem 0;text-align:center">
     <div class="container">
-      <p style="color:var(--color-text-muted);font-size:0.875rem">&copy; 2026 Mithun Hasan. Built with <a href="https://github.com/eMithun/CodeFX" style="color:var(--color-primary)">CodeFX</a>.</p>
+      <p style="color:var(--color-text-muted);font-size:0.875rem">&copy; 2026 Mithun Hasan. <a href="/projects" style="color:var(--color-primary)">eMithun Portfolio</a></p>
     </div>
   </footer>
 
@@ -172,5 +89,93 @@
   <script src="/assets/js/core.js"></script>
   <script src="/assets/js/auth.js"></script>
   <script src="/assets/js/sso.js"></script>
+  <script>
+    // Load and render projects
+    async function loadProjects() {
+      try {
+        const response = await fetch('/assets/data/projects.json');
+        const projects = await response.json();
+        renderProjects(projects);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+        renderProjects([
+          {
+            id: 1,
+            name: "CodeFX",
+            description: "Modular multi-platform web framework",
+            tags: ["Web", "Framework"],
+            status: "live",
+            version: "v1.0.0",
+            githubUrl: "https://github.com/eMithun/CodeFX",
+            trackingUrl: "https://status.example.com/codefx",
+            devices: ["Desktop", "Mobile"]
+          }
+        ]);
+      }
+    }
+
+    function renderProjects(projects) {
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = projects.map(project => {
+        let statusBg = '';
+        switch(project.status) {
+          case 'live': statusBg = 'var(--color-success)'; break;
+          case 'maintenance': statusBg = 'var(--color-warning)'; break;
+          case 'offline': statusBg = 'var(--color-error)'; break;
+        }
+        
+        return `
+        <div class="project-card animate-in" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.75rem; transition: all 0.3s ease; position: relative; overflow: hidden;">
+          <div class="project-icon" style="width:48px;height:48px;border-radius:var(--radius-lg);background:var(--color-gradient-1);display:flex;align-items:center;justify-content:center;color:white;font-size:1.25rem;font-weight:700;margin-bottom:1rem">
+            ${project.name.charAt(0).toUpperCase()}
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+            <h3 style="font-size:1.1rem;font-weight:700;margin:0">${project.name}</h3>
+            <span class="badge" style="font-size:0.65rem;padding:0.15rem 0.5rem;background:${statusBg};color:white">${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
+          </div>
+          <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:1rem">${project.description}</p>
+          
+          <div style="display:flex;gap:0.375rem;flex-wrap:wrap;margin-bottom:1rem">
+            ${project.tags.map(tag => `<span style="padding:0.2rem 0.6rem;border-radius:var(--radius-md);font-size:0.75rem;background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text-muted)">${tag}</span>`).join('')}
+          </div>
+
+          <div class="project-meta">
+            <div class="meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7l3-7z"/>
+              </svg>
+              <span>Version: ${project.version}</span>
+            </div>
+            <div class="meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+              </svg>
+              <span>Devices: ${project.devices.join(', ')}</span>
+            </div>
+            <div class="meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+              </svg>
+              <a href="${project.githubUrl}" target="_blank" style="color:var(--color-primary);text-decoration:none">GitHub</a>
+            </div>
+            <div class="meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <a href="${project.trackingUrl}" target="_blank" style="color:var(--color-primary);text-decoration:none">Status</a>
+            </div>
+          </div>
+        </div>
+      `}).join('');
+
+      // Add animation to new elements
+      setTimeout(() => {
+        document.querySelectorAll('.animate-in').forEach(el => el.classList.add('visible'));
+      }, 100);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProjects);
+  </script>
 </body>
 </html>
