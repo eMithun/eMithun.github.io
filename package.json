@@ -1,0 +1,8 @@
+{
+  "name": "emithun-portfolio",
+  "version": "1.0.0",
+  "description": "Mithun Hasan's Portfolio",
+  "dependencies": {
+    "@vercel/kv": "^1.0.1"
+  }
+}

@@ -16,3 +16,10 @@ Thumbs.db
 node_modules/
 dist/
 build/
+
+# Vercel secrets (NEVER commit this!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
